@@ -1,0 +1,65 @@
+.swaps-widget {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.swaps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.swaps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.swap-item {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.swap-assets {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.asset {
+  font-family: monospace;
+}
+
+.swap-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: #eee;
+  border-radius: 2px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #00b4e6;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.swap-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.9em;
+  color: #666;
+}
