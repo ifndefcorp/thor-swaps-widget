@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+
 interface Asset {
   asset: string;
   amount: number;
 }
 
-interface StreamingSwap {
+export interface StreamingSwap {
   tx_id: string;
   count: number;
   quantity: number;
@@ -15,6 +16,11 @@ interface StreamingSwap {
   target_asset: string;
   deposit: number;
   trade_target?: number;
+  inputAsset?: Asset;
+  outputAsset?: Asset;
+  remainingSwaps: number;
+  completionPercent: number;
+  eta: string;
 }
 
 const THOR_NODE_URL = "https://thornode.ninerealms.com/thorchain";
