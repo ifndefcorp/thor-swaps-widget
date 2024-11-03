@@ -17,11 +17,9 @@ interface StreamingSwap {
   trade_target?: number;
 }
 
-interface SwapsWidgetProps {
-  thorNodeUrl: string; // Base URL for THORNode API, e.g. "https://thornode.ninerealms.com/thorchain"
-}
+const THOR_NODE_URL = "https://thornode.ninerealms.com/thorchain";
 
-const SwapsWidget: React.FC<SwapsWidgetProps> = ({ thorNodeUrl }) => {
+const SwapsWidget: React.FC = () => {
   const [swaps, setSwaps] = useState<StreamingSwap[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -52,7 +50,7 @@ const SwapsWidget: React.FC<SwapsWidgetProps> = ({ thorNodeUrl }) => {
 
   const fetchSwapDetails = async (txId: string) => {
     try {
-      const response = await axios.get(`${thorNodeUrl}/tx/status/${txId}`);
+      const response = await axios.get(`${THOR_NODE_URL}/tx/status/${txId}`);
       return response.data;
     } catch (err) {
       console.error(`Error fetching swap details for ${txId}:`, err);
@@ -64,8 +62,8 @@ const SwapsWidget: React.FC<SwapsWidgetProps> = ({ thorNodeUrl }) => {
     try {
       setLoading(true);
       
-      // Use the exact endpoint from thornode.api.js
-      const response = await axios.get(`${thorNodeUrl}/swaps/streaming`);
+      // Use THOR_NODE_URL instead of thorNodeUrl
+      const response = await axios.get(`${THOR_NODE_URL}/swaps/streaming`);
       const swapsData: StreamingSwap[] = response.data;
 
       // Fetch details for each swap
