@@ -1,31 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { amountToUSD } from '../utils/thorchain';
-
-interface Asset {
-  asset: string;
-  amount: number;
-}
-
-export interface StreamingSwap {
-  tx_id: string;
-  count: number;
-  quantity: number;
-  interval: number;
-  source_asset: string;
-  target_asset: string;
-  deposit: number;
-  trade_target?: number;
-  inputAsset?: Asset;
-  outputAsset?: Asset;
-  remainingSwaps: number;
-  completionPercent: number;
-  eta: string;
-}
+import { StreamingSwap, Pool } from '../types/thorchain';
 
 const THOR_NODE_URL = "https://thornode.ninerealms.com/thorchain";
 
-interface SwapsWidgetStyles {
+export interface SwapsWidgetStyles {
   fonts?: {
     titleFont?: string;
     bodyFont?: string;
@@ -38,15 +18,7 @@ interface SwapsWidgetStyles {
   cornerRadius?: string;
 }
 
-interface Pool {
-  asset: string;
-  assetDepth: string;
-  runeDepth: string;
-  assetPriceUSD?: string;
-  decimals?: number;
-}
-
-interface SwapsWidgetProps {
+export interface SwapsWidgetProps {
   styles?: SwapsWidgetStyles;
 }
 

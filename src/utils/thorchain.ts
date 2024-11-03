@@ -1,9 +1,6 @@
 import moment from 'moment';
-import ColorHash from 'color-hash';
-import { formatBN, bnOrZero, AssetCurrencySymbol } from '@xchainjs/xchain-util';
-import { AssetEntity, Pool, ParsedMemo, ParseConstantOptions } from '../types/thorchain';
-
-const colorHash = new ColorHash({ lightness: 0.5 });
+import { formatBN, bnOrZero } from '@xchainjs/xchain-util';
+import { AssetEntity, Pool, ParsedMemo } from '../types/thorchain';
 
 // Asset utilities
 export const assetFromString = (assetStr: string): AssetEntity | null => {
@@ -110,7 +107,7 @@ export const amountToUSD = (
     copyAsset.synth = false;
   }
   if (copyAsset.trade) {
-    copyAsset.trade = false;
+    delete copyAsset.trade;
   }
 
   const assetString = assetToString(copyAsset);

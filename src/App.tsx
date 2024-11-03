@@ -2,7 +2,6 @@ import SwapsWidget from './components/SwapsWidget';
 import './styles/SwapsWidget.css';
 
 function App() {
-  // Example custom styles (optional)
   const customStyles = {
     fonts: {
       titleFont: 'Georgia, serif',
@@ -17,7 +16,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
       <SwapsWidget styles={customStyles} />
     </div>
   );

@@ -1,10 +1,37 @@
+export interface Asset {
+  asset: string;
+  amount: number;
+}
+
 export interface AssetEntity {
   chain: string;
   symbol: string;
   ticker: string;
+  iconPath?: string;
   synth?: boolean;
-  trade?: boolean;
-  address?: string;
+  trade?: {
+    averageSlip?: number;
+    volume24h?: number;
+    totalVolume?: number;
+    totalFees?: number;
+    totalSwaps?: number;
+  };
+}
+
+export interface StreamingSwap {
+  tx_id: string;
+  count: number;
+  quantity: number;
+  interval: number;
+  source_asset: string;
+  target_asset: string;
+  deposit: number;
+  trade_target?: number;
+  inputAsset?: Asset;
+  outputAsset?: Asset;
+  remainingSwaps: number;
+  completionPercent: number;
+  eta: string;
 }
 
 export interface Pool {
