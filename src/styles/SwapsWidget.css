@@ -73,3 +73,13 @@
 .tx-link:hover {
   opacity: 0.8;
 }
+
+.swaps-summary {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.swaps-summary span {
+  white-space: nowrap;
+}
