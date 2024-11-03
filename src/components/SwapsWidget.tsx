@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { amountToUSD, assetFromString } from '../utils/thorchain';
+import { amountToUSD } from '../utils/thorchain';
 
 interface Asset {
   asset: string;
@@ -23,7 +23,6 @@ export interface StreamingSwap {
   eta: string;
 }
 
-const MIDGARD_URL = "/thorchain";
 const THOR_NODE_URL = "https://thornode.ninerealms.com/thorchain";
 
 interface SwapsWidgetStyles {
@@ -106,8 +105,8 @@ const SwapsWidget: React.FC<SwapsWidgetProps> = ({ styles }) => {
         decimals: pool.decimals || 8
       }));
       
-      // Log relevant pool data
-      console.debug('Fetched pools:', poolsData.map(p => ({
+      // Log relevant pool data with proper typing
+      console.debug('Fetched pools:', poolsData.map((p: Pool) => ({
         asset: p.asset,
         assetDepth: p.assetDepth.slice(0, 10) + '...',
         runeDepth: p.runeDepth.slice(0, 10) + '...',
