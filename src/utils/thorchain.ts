@@ -97,6 +97,7 @@ export const amountToUSD = (
   pools: Pool[]
 ): number => {
   if (!asset || !amount || !pools) {
+    console.debug('[amountToUSD] Invalid input:', { asset, amount, poolsLength: pools?.length });
     return 0;
   }
 
@@ -112,14 +113,42 @@ export const amountToUSD = (
     copyAsset.trade = false;
   }
 
-  if (copyAsset.chain === 'THOR' && copyAsset.symbol === 'RUNE') {
-    return (amount / 1e8) * usdPerRune(pools);
+  const assetString = assetToString(copyAsset);
+  const pool = pools.find(p => p.asset === assetString);
+
+  if (!pool) {
+    console.debug(`[amountToUSD] No pool found for asset: ${assetString}`);
+    return 0;
   }
 
-  const pool = pools.find(p => p.asset === assetToString(copyAsset));
-  const pricePerAsset = pool?.assetPriceUSD ? +pool.assetPriceUSD : 0;
+  // Calculate price in RUNE first
+  const decimals = pool.decimals || 8;
+  const assetDepth = parseInt(pool.assetDepth) / Math.pow(10, decimals);
+  const runeDepth = parseInt(pool.runeDepth) / 1e8;
+  
+  if (!assetDepth || !runeDepth) {
+    console.debug(`[amountToUSD] Invalid pool depths:`, { assetDepth, runeDepth });
+    return 0;
+  }
 
-  return (amount / 1e8) * pricePerAsset;
+  // Price in RUNE = runeDepth / assetDepth
+  const priceInRune = runeDepth / assetDepth;
+  
+  // Get RUNE price in USD
+  const runeUsdPrice = usdPerRune(pools);
+  
+  // Calculate final USD value - divide by 100 to correct the scale
+  const usdValue = (amount / 1e8) * priceInRune * runeUsdPrice / 100;
+
+  console.debug(`[amountToUSD] Calculation:`, {
+    asset: assetString,
+    amount: amount / 1e8,
+    priceInRune,
+    runeUsdPrice,
+    usdValue
+  });
+
+  return usdValue;
 };
 
 export const usdPerRune = (pools: Pool[]): number => {
