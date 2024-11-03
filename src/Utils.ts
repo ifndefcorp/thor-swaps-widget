@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { formatBN, bnOrZero } from '@xchainjs/xchain-util';
-import { AssetEntity, Pool, ParsedMemo } from '../types/thorchain';
+import { AssetEntity, Pool, ParsedMemo } from './Models';
 
 // Asset utilities
 export const assetFromString = (assetStr: string): AssetEntity | null => {

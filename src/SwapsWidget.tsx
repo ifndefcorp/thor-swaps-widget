@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { amountToUSD } from '../utils/thorchain';
-import { StreamingSwap, Pool } from '../types/thorchain';
+import { amountToUSD } from './Utils';
+import { StreamingSwap, Pool } from './Models';
 
 const THOR_NODE_URL = "https://thornode.ninerealms.com/thorchain";
 

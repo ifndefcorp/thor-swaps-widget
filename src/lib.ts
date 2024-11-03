@@ -1,3 +1,3 @@
-export { default as SwapsWidget } from './components/SwapsWidget';
-export type { SwapsWidgetProps, SwapsWidgetStyles } from './components/SwapsWidget';
-export type { StreamingSwap } from './types/thorchain'; 
+export { default as SwapsWidget } from './SwapsWidget';
+export type { SwapsWidgetProps, SwapsWidgetStyles } from './SwapsWidget';
+export type { StreamingSwap } from './Models'; 

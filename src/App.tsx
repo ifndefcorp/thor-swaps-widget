@@ -1,5 +1,5 @@
-import SwapsWidget from './components/SwapsWidget';
-import './styles/SwapsWidget.css';
+import SwapsWidget from './SwapsWidget';
+import './SwapsWidget.css';
 
 function App() {
   const customStyles = {
