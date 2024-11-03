@@ -59,6 +59,10 @@ const SwapsWidget: React.FC<SwapsWidgetProps> = ({ styles }) => {
     return `${address.slice(0, 6)}...${address.slice(-6)}`;
   };
 
+  const getTxUrl = (txId: string): string => {
+    return `https://thorchain.net/tx/${txId}`;
+  };
+
   const calculateETA = (remainingIntervals: number): string => {
     // Each block is roughly 6 seconds
     const seconds = remainingIntervals * 6;
@@ -199,7 +203,17 @@ const SwapsWidget: React.FC<SwapsWidgetProps> = ({ styles }) => {
             </div>
 
             <div className="swap-info" style={widgetStyles.details}>
-              <span>TX: {formatAddress(swap.tx_id)}</span>
+              <span>
+                TX:{' '}
+                <a 
+                  href={getTxUrl(swap.tx_id)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="tx-link"
+                >
+                  {formatAddress(swap.tx_id)}
+                </a>
+              </span>
               <span>{swap.interval} Blocks/Swap</span>
               <span>ETA: {swap.eta}</span>
               <span>Remaining: {swap.remainingSwaps} swaps</span>

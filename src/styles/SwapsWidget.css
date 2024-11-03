@@ -63,3 +63,13 @@
   font-size: 0.9em;
   color: #666;
 }
+
+.tx-link {
+  color: #00b4e6;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.tx-link:hover {
+  opacity: 0.8;
+}
