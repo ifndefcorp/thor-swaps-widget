@@ -25,7 +25,24 @@ export interface StreamingSwap {
 
 const THOR_NODE_URL = "https://thornode.ninerealms.com/thorchain";
 
-const SwapsWidget: React.FC = () => {
+interface SwapsWidgetStyles {
+  fonts?: {
+    titleFont?: string;
+    bodyFont?: string;
+    detailFont?: string;
+  };
+  colors?: {
+    primaryText?: string;
+    secondaryText?: string;
+  };
+  cornerRadius?: string;
+}
+
+interface SwapsWidgetProps {
+  styles?: SwapsWidgetStyles;
+}
+
+const SwapsWidget: React.FC<SwapsWidgetProps> = ({ styles }) => {
   const [swaps, setSwaps] = useState<StreamingSwap[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -122,23 +139,42 @@ const SwapsWidget: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Create dynamic styles
+  const widgetStyles = {
+    widget: {
+      borderRadius: styles?.cornerRadius || '8px',
+    },
+    title: {
+      fontFamily: styles?.fonts?.titleFont || 'inherit',
+      color: styles?.colors?.primaryText || 'inherit',
+    },
+    body: {
+      fontFamily: styles?.fonts?.bodyFont || 'inherit',
+      color: styles?.colors?.primaryText || 'inherit',
+    },
+    details: {
+      fontFamily: styles?.fonts?.detailFont || 'inherit',
+      color: styles?.colors?.secondaryText || '#666',
+    },
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (swaps.length === 0) return <div>No active streaming swaps</div>;
 
   return (
-    <div className="swaps-widget">
+    <div className="swaps-widget" style={widgetStyles.widget}>
       <div className="swaps-header">
-        <h2>Ongoing Streaming Swaps</h2>
-        <div className="swaps-summary">
+        <h2 style={widgetStyles.title}>Ongoing Streaming Swaps</h2>
+        <div className="swaps-summary" style={widgetStyles.body}>
           <span>Total Swaps: {swaps.length}</span>
         </div>
       </div>
 
       <div className="swaps-list">
         {swaps.map((swap) => (
-          <div key={swap.tx_id} className="swap-item">
-            <div className="swap-assets">
+          <div key={swap.tx_id} className="swap-item" style={widgetStyles.widget}>
+            <div className="swap-assets" style={widgetStyles.body}>
               {swap.inputAsset && (
                 <span className="asset">
                   {formatNumber(swap.inputAsset.amount)} {swap.inputAsset.asset}
@@ -159,10 +195,10 @@ const SwapsWidget: React.FC = () => {
                   style={{ width: `${swap.completionPercent}%` }}
                 />
               </div>
-              <span>{formatNumber(swap.completionPercent || 0, 1)}%</span>
+              <span style={widgetStyles.body}>{formatNumber(swap.completionPercent || 0, 1)}%</span>
             </div>
 
-            <div className="swap-info">
+            <div className="swap-info" style={widgetStyles.details}>
               <span>TX: {formatAddress(swap.tx_id)}</span>
               <span>{swap.interval} Blocks/Swap</span>
               <span>ETA: {swap.eta}</span>
