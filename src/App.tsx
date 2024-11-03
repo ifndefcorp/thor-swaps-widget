@@ -6,7 +6,7 @@ function App() {
   return (
     <div style={{ maxWidth: '800px', margin: '40px auto', padding: '0 20px' }}>
       <h1>THORChain Streaming Swaps</h1>
-      <SwapsWidget thorNodeUrl="https://thornode.ninerealms.com/thorchain" />
+      <SwapsWidget />
     </div>
   );
 }
