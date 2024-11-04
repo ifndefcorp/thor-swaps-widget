@@ -1,14 +1,19 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/lib.ts'),
-      formats: ['es'],
-      fileName: 'index'
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'ThorchainStreamingSwapsWidget',
+      fileName: 'index',
+      formats: ['es']
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
@@ -20,6 +25,6 @@ export default defineConfig({
       }
     },
     sourcemap: true,
-    chunkSizeWarningLimit: 1000
+    cssCodeSplit: false
   }
 }); 

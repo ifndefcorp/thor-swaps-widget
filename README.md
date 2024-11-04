@@ -1,16 +1,18 @@
 # THORChain Streaming Swaps Widget
 
-A React component for displaying THORChain streaming swaps in real-time.
+A React widget for displaying THORChain swaps in real-time.
+
+## Installation
+
+```bash
+npm install thorchain-streaming-swaps-widget
+# or
+yarn add thorchain-streaming-swaps-widget
+```
 
 ## Quick Start
 
-### 1. Installation
-
-```bash
-bun add github:rorallo/thorchain-streaming-swaps-widget
-```
-
-### 2. Basic Usage
+### 1. Basic Usage
 
 ```tsx
 import { SwapsWidget } from 'thorchain-streaming-swaps-widget';
@@ -22,7 +24,7 @@ function App() {
 }
 ```
 
-### 3. Customized Usage
+### 2. Customized Usage
 
 ```tsx
 import { SwapsWidget } from 'thorchain-streaming-swaps-widget';
